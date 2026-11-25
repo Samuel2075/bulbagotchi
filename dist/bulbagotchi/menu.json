@@ -1,9 +1,11 @@
-{
+[
+  {
+    "name": "Bulbagotchi",
     "items": [
-        {
-            "name": "Abrir Bulbagotchi",
-            "priority": 1,
-            "action": "/mnt/us/extensions/bulbagotchi/bin/bulbagotchi"
-        }
+      {
+        "name": "Iniciar Bulbagotchi",
+        "action": "sh -c 'cd /mnt/us/extensions/bulbagotchi && killall bulbagotchi 2>/dev/null || true; sleep 0.2; export DISPLAY=:0 && ./bin/bulbagotchi'"
+      }
     ]
-}
+  }
+]

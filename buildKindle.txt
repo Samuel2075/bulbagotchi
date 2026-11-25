@@ -1,0 +1,43 @@
+ARM_GCC="/home/samuel/kindle-build/koxtoolchain/build/kindlehf/.build/arm-kindlehf-linux-gnueabihf/buildtools/bin/arm-kindlehf-linux-gnueabihf-gcc"
+SYSROOT="/home/samuel/x-tools/arm-kindlehf-linux-gnueabihf/arm-kindlehf-linux-gnueabihf/sysroot"
+
+cd /mnt/d/DEV/GIT/bulbagotchi
+rm -rf build dist/bulbagotchi/bin/bulbagotchi bulbagotchi-kindle-release.zip
+mkdir -p build/include/gnu dist/bulbagotchi/bin
+[ -f "$SYSROOT/usr/include/gnu/stubs-hard.h" ] || : > build/include/gnu/stubs-hard.h
+
+"$ARM_GCC" --sysroot="$SYSROOT" src/main.c -o dist/bulbagotchi/bin/bulbagotchi \
+  -O2 -Wall -Wextra -Wno-unused-local-typedefs \
+  -I"/mnt/d/DEV/GIT/bulbagotchi/build/include" \
+  -I"$SYSROOT/usr/lib/gtk-2.0/include" \
+  -I"$SYSROOT/usr/include/gtk-2.0" \
+  -I"$SYSROOT/usr/lib/arm-linux-gnueabihf/gtk-2.0/include" \
+  -I"$SYSROOT/usr/lib/arm-kindlehf-linux-gnueabihf/gtk-2.0/include" \
+  -I"$SYSROOT/usr/lib/glib-2.0/include" \
+  -I"$SYSROOT/usr/include/glib-2.0" \
+  -I"$SYSROOT/usr/lib/arm-linux-gnueabihf/glib-2.0/include" \
+  -I"$SYSROOT/usr/lib/arm-kindlehf-linux-gnueabihf/glib-2.0/include" \
+  -I"$SYSROOT/usr/include/pango-1.0" \
+  -I"$SYSROOT/usr/include/cairo" \
+  -I"$SYSROOT/usr/include/gdk-pixbuf-2.0" \
+  -I"$SYSROOT/usr/include/atk-1.0" \
+  -I"$SYSROOT/usr/include/harfbuzz" \
+  -I"$SYSROOT/usr/include/freetype2" \
+  -I"$SYSROOT/usr/include/libpng16" \
+  -L"$SYSROOT/usr/lib" \
+  -L"$SYSROOT/usr/lib/arm-linux-gnueabihf" \
+  -L"$SYSROOT/usr/lib/arm-kindlehf-linux-gnueabihf" \
+  -lgtk-x11-2.0 -lgdk-x11-2.0 -lpangocairo-1.0 -latk-1.0 \
+  -lcairo -lgdk_pixbuf-2.0 -lgio-2.0 -lpango-1.0 \
+  -lgobject-2.0 -lglib-2.0 -s
+
+chmod +x dist/bulbagotchi/bin/bulbagotchi
+file dist/bulbagotchi/bin/bulbagotchi
+rm -f dist/bulbagotchi/save.dat
+(cd dist && zip -r ../bulbagotchi-kindle-release.zip bulbagotchi)
+
+
+
+
+
+compilar e gerar zip
