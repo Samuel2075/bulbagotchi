@@ -1,0 +1,9 @@
+{
+    "items": [
+        {
+            "name": "Abrir Bulbagotchi",
+            "priority": 1,
+            "action": "/mnt/us/extensions/bulbagotchi/bin/bulbagotchi"
+        }
+    ]
+}
